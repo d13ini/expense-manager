@@ -2,19 +2,21 @@ const express = require('express');
 const app     = express();
 const PORT    = 3000;
 
-// Middleware — i thotë Express të lexojë JSON nga body i kërkesave
+// Middleware — lexon JSON nga body i kërkesave
 app.use(express.json());
 
-// Route test — konfirmon që serveri punon
+// Importo routes
+const categoryRoutes = require('./routes/categories');
+const expenseRoutes  = require('./routes/expenses');
+
+// Lidh routes me URL-të përkatëse
+app.use('/api/categories', categoryRoutes);
+app.use('/api/expenses',   expenseRoutes);
+
+// Route test
 app.get('/', (req, res) => {
   res.json({ message: '✅ Expense Manager API është aktiv' });
 });
-
-// Importo routes (i shtojmë pas)
-// const expenseRoutes  = require('./routes/expenses');
-// const categoryRoutes = require('./routes/categories');
-// app.use('/api/expenses',   expenseRoutes);
-// app.use('/api/categories', categoryRoutes);
 
 app.listen(PORT, () => {
   console.log(`🚀 Serveri po dëgjon në http://localhost:${PORT}`);
