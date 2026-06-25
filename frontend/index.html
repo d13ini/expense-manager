@@ -73,10 +73,36 @@
     </section>
 
   </div>
+  <!-- SEKSIONI I GRAFIKËVE -->
+<section class="charts-section">
+  <h2>Analiza</h2>
 
-  <!-- Scripts — në fund të body-t -->
+  <!-- Toggle buttons -->
+  <div class="chart-toggle">
+    <button class="btn-toggle active" data-period="daily">Ditore</button>
+    <button class="btn-toggle" data-period="weekly">Javore</button>
+    <button class="btn-toggle" data-period="monthly">Mujore</button>
+  </div>
+
+  <!-- Bar/Line Chart -->
+  <div class="chart-container">
+    <canvas id="trend-chart"></canvas>
+  </div>
+
+  <!-- Donut Chart -->
+  <div class="chart-container">
+    <canvas id="donut-chart"></canvas>
+  </div>
+
+</section>
+
+<!-- Chart.js nga CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Scripts  -->
   <script src="js/api.js"></script>
   <script src="js/ui.js"></script>
+  <script src="js/charts.js"></script>
   <script src="js/main.js"></script>
 
 </body>

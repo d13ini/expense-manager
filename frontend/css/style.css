@@ -238,3 +238,39 @@ input:focus, select:focus {
     grid-template-columns: 1fr;
   }
 }
+
+/* ─── CHARTS ──────────────────────────────────────── */
+.charts-section {
+  margin-top: 1.5rem;
+}
+
+.chart-toggle {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn-toggle {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-toggle.active {
+  background: #6366f1;
+  color: white;
+  border-color: #6366f1;
+}
+.chart-container {
+  position: relative;
+  margin-bottom: 2rem;
+  height: 280px;
+  width: 100%;
+  max-width: 100%;
+}

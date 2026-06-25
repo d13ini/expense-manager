@@ -9,7 +9,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   await loadCategories();
   await loadExpenses();
+  await initCharts(); // inicializo grafikun
 });
+
 
 // ─── LOAD FUNCTIONS ───────────────────────────────────
 
