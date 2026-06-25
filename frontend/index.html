@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menaxhues Shpenzimesh</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- HEADER -->
+    <header>
+      <h1>💰 Menaxhues Shpenzimesh</h1>
+      <p class="subtitle">Gjurmo shpenzimet e tua ditore</p>
+    </header>
+
+    <!-- FORMA E SHTIMIT -->
+    <section class="form-section">
+      <h2>Shto Shpenzim</h2>
+      <div class="form">
+
+        <div class="form-group">
+          <label for="amount">Shuma (€)</label>
+          <input type="number" id="amount" placeholder="0.00" step="0.01" min="0" />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Përshkrimi</label>
+          <input type="text" id="description" placeholder="p.sh. Kafe, Biletë autobus..." />
+        </div>
+
+        <div class="form-group">
+          <label for="category">Kategoria</label>
+          <select id="category">
+            <option value="">-- Zgjidh kategorinë --</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="date">Data</label>
+          <input type="date" id="date" />
+        </div>
+
+        <button id="btn-add" class="btn-primary">+ Shto Shpenzim</button>
+
+      </div>
+    </section>
+
+    <!-- STATISTIKAT -->
+    <section class="stats-section">
+      <div class="stat-card">
+        <span class="stat-label">Sot</span>
+        <span class="stat-value" id="total-today">€0.00</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Këtë muaj</span>
+        <span class="stat-value" id="total-month">€0.00</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Gjithsej</span>
+        <span class="stat-value" id="total-all">€0.00</span>
+      </div>
+    </section>
+
+    <!-- LISTA E SHPENZIMEVE -->
+    <section class="list-section">
+      <h2>Shpenzimet</h2>
+      <div id="expenses-list">
+        <p class="empty-msg">Nuk ka shpenzime ende.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Scripts — në fund të body-t -->
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>

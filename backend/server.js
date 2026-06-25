@@ -1,19 +1,17 @@
 const express = require('express');
+const cors    = require('cors');  // lejo kërkesa nga porte të ndryshme
 const app     = express();
 const PORT    = 3000;
 
-// Middleware — lexon JSON nga body i kërkesave
+app.use(cors());        // aktivizo CORS për të gjitha routes
 app.use(express.json());
 
-// Importo routes
 const categoryRoutes = require('./routes/categories');
 const expenseRoutes  = require('./routes/expenses');
 
-// Lidh routes me URL-të përkatëse
 app.use('/api/categories', categoryRoutes);
 app.use('/api/expenses',   expenseRoutes);
 
-// Route test
 app.get('/', (req, res) => {
   res.json({ message: '✅ Expense Manager API është aktiv' });
 });
