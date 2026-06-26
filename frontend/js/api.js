@@ -36,3 +36,19 @@ async function deleteExpense(id) {
   });
   return response.json();
 }
+
+// ─── ALERT CONFIG ─────────────────────────────────────
+
+async function getAlertConfig() {
+  const response = await fetch(`${BASE_URL}/alert-config`);
+  return response.json();
+}
+
+async function saveAlertConfig(data) {
+  const response = await fetch(`${BASE_URL}/alert-config`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+  return response.json();
+}

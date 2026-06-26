@@ -1,6 +1,7 @@
 // charts.js — të gjitha grafikët me Chart.js
 
 let trendChart = null; // ruajmë referencën për të mundur update-in
+let donutChart = null;
 
 // ─── BAR / LINE CHART ─────────────────────────────────
 async function loadTrendChart(period = 'daily') {
@@ -73,18 +74,19 @@ async function loadDonutChart() {
   const data = await fetch('http://localhost:3000/api/stats/by-category')
     .then(r => r.json());
 
-  // filtro vetëm kategoritë me shpenzime
   const filtered = data.filter(cat => parseFloat(cat.total_amount) > 0);
-
-  if (filtered.length === 0) return; // mos krijo grafik bosh
+  if (filtered.length === 0) return;
 
   const labels = filtered.map(cat => cat.name);
   const values = filtered.map(cat => parseFloat(cat.total_amount));
   const colors = filtered.map(cat => cat.color);
 
+  // shkatërro chart-in ekzistues para se të krijosh të ri
+  if (donutChart) donutChart.destroy();
+
   const ctx = document.getElementById('donut-chart').getContext('2d');
 
-  new Chart(ctx, {
+  donutChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
       labels,
@@ -98,11 +100,11 @@ async function loadDonutChart() {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-     plugins: {
-  legend: {
-    position: 'bottom',    // ndrysho nga 'right' në 'bottom'
-    labels: { font: { size: 12 } }
-  },
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: { font: { size: 12 } }
+        },
         tooltip: {
           callbacks: {
             label: ctx => `€${ctx.parsed.toFixed(2)}`

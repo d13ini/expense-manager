@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   await loadCategories();
   await loadExpenses();
+  await loadAlertConfig();
   await initCharts(); // inicializo grafikun
 });
 
@@ -69,6 +70,7 @@ document.getElementById('btn-add').addEventListener('click', async () => {
     document.getElementById('date').value = new Date().toISOString().split('T')[0];
 
     await loadExpenses(); // rifresko listën
+    await initCharts(); // rifresko grafikun
   } catch (err) {
     showMessage('Gabim gjatë shtimit të shpenzimit', 'error');
   }
@@ -84,7 +86,37 @@ async function handleDelete(id) {
     await deleteExpense(id);
     showMessage('Shpenzimi u fshi!');
     await loadExpenses(); // rifresko listën
+    await initCharts(); // rifresko grafikun
   } catch (err) {
     showMessage('Gabim gjatë fshirjes', 'error');
   }
 }
+// ─── ALERT CONFIG ─────────────────────────────────────
+
+async function loadAlertConfig() {
+  try {
+    const config = await getAlertConfig();
+    document.getElementById('alert-limit').value = config.monthly_limit;
+    // mos e shfaq email-in — useri e vendos vetë
+    document.getElementById('alert-email').placeholder = 'Vendos email-in tënd';
+  } catch (err) {
+    console.error('Gabim gjatë ngarkimit të konfigurimit:', err);
+  }
+}
+
+document.getElementById('btn-save-alert').addEventListener('click', async () => {
+  const email         = document.getElementById('alert-email').value;
+  const monthly_limit = document.getElementById('alert-limit').value;
+
+  if (!email || !monthly_limit) {
+    showMessage('Plotëso të gjitha fushat', 'error');
+    return;
+  }
+
+  try {
+    await saveAlertConfig({ email, monthly_limit: parseFloat(monthly_limit) });
+    showMessage('Konfigurimi u ruajt!');
+  } catch (err) {
+    showMessage('Gabim gjatë ruajtjes', 'error');
+  }
+});
