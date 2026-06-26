@@ -19,11 +19,13 @@ router.get('/', async (req, res) => {
 // ─── POST /api/expenses ────────────────────────────────
 // Shton shpenzim të ri
 // Body: { amount, description, category_id, expense_date }
+const { checkAndSendAlert } = require('../services/emailService');
+
+// ─── POST /api/expenses ────────────────────────────────
 router.post('/', async (req, res) => {
   try {
     const { amount, description, category_id, expense_date } = req.body;
 
-    // validim bazë
     if (!amount || amount <= 0) {
       return res.status(400).json({ error: 'Shuma duhet të jetë më e madhe se 0' });
     }
@@ -34,6 +36,9 @@ router.post('/', async (req, res) => {
        RETURNING *`,
       [amount, description || null, category_id || null, expense_date || new Date()]
     );
+
+    // kontrollo limitin menjëherë pas shtimit — E RE
+    checkAndSendAlert();
 
     res.status(201).json(result.rows[0]);
   } catch (err) {
