@@ -12,41 +12,17 @@
 
     <!-- HEADER -->
     <header>
-      <h1>💰 Menaxhues Shpenzimesh</h1>
-      <p class="subtitle">Gjurmo shpenzimet e tua ditore</p>
-    </header>
-
-    <!-- FORMA E SHTIMIT -->
-    <section class="form-section">
-      <h2>Shto Shpenzim</h2>
-      <div class="form">
-
-        <div class="form-group">
-          <label for="amount">Shuma (€)</label>
-          <input type="number" id="amount" placeholder="0.00" step="0.01" min="0" />
+      <div class="header-top">
+        <div>
+          <h1>Menaxhues Shpenzimesh</h1>
+          <p class="subtitle">Gjurmo shpenzimet e tua</p>
         </div>
-
-        <div class="form-group">
-          <label for="description">Përshkrimi</label>
-          <input type="text" id="description" placeholder="p.sh. Kafe, Biletë autobus..." />
+        <div class="header-actions">
+          <a href="analysis.html" class="btn-nav">📊 Analiza →</a>
+          <button id="theme-toggle" aria-label="Change Theme">🌙</button>
         </div>
-
-        <div class="form-group">
-          <label for="category">Kategoria</label>
-          <select id="category">
-            <option value="">-- Zgjidh kategorinë --</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="date">Data</label>
-          <input type="date" id="date" />
-        </div>
-
-        <button id="btn-add" class="btn-primary">+ Shto Shpenzim</button>
-
       </div>
-    </section>
+    </header>
 
     <!-- STATISTIKAT -->
     <section class="stats-section">
@@ -64,65 +40,70 @@
       </div>
     </section>
 
-    <!-- KONFIGURIMI I ALERTIT -->
-<section class="alert-section">
-  <h2>⚙️ Konfiguro Alert</h2>
-  <div class="form">
+    <!-- GRID KRYESOR: E majta (forma + alert) | E djathta (lista) -->
+    <div class="main-grid">
 
-    <div class="form-group">
-      <label for="alert-limit">Limiti Mujor (€)</label>
-      <input type="number" id="alert-limit" placeholder="500" min="0" step="10" />
-    </div>
+      <!-- KOLONA E MAJTË -->
+      <div class="left-col">
 
-    <div class="form-group">
-      <label for="alert-email">Email për Njoftime</label>
-      <input type="email" id="alert-email" placeholder="your-mail@mail.com" />
-    </div>
+        <!-- FORMA E SHTIMIT -->
+        <section class="form-section">
+          <h2>Shto Shpenzim</h2>
+          <div class="form">
+            <div class="form-group">
+              <label for="amount">Shuma (€)</label>
+              <input type="number" id="amount" placeholder="0.00" step="0.01" min="0" />
+            </div>
+            <div class="form-group">
+              <label for="description">Përshkrimi</label>
+              <input type="text" id="description" placeholder="p.sh. Kafe, Biletë autobus..." />
+            </div>
+            <div class="form-group">
+              <label for="category">Kategoria</label>
+              <select id="category">
+                <option value="">-- Zgjidh kategorinë --</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="date">Data</label>
+              <input type="date" id="date" />
+            </div>
+            <button id="btn-add" class="btn-primary">+ Shto Shpenzim</button>
+          </div>
+        </section>
 
-    <button id="btn-save-alert" class="btn-primary">💾 Ruaj Konfigurimin</button>
+        <!-- KONFIGURIMI I ALERTIT -->
+        <section class="alert-section">
+          <h2>Konfigurimi i Alertit</h2>
+          <div class="form">
+            <div class="form-group">
+              <label for="alert-limit">Limiti Mujor (€)</label>
+              <input type="number" id="alert-limit" placeholder="500" min="0" step="10" />
+            </div>
+            <div class="form-group">
+              <label for="alert-email">Email për Njoftime</label>
+              <input type="email" id="alert-email" placeholder="your-mail@mail.com" />
+            </div>
+            <button id="btn-save-alert" class="btn-primary">💾 Ruaj Konfigurimin</button>
+          </div>
+        </section>
 
-  </div>
-</section>
-
-    <!-- LISTA E SHPENZIMEVE -->
-    <section class="list-section">
-      <h2>Shpenzimet</h2>
-      <div id="expenses-list">
-        <p class="empty-msg">Nuk ka shpenzime ende.</p>
       </div>
-    </section>
 
-  </div>
-  <!-- SEKSIONI I GRAFIKËVE -->
-<section class="charts-section">
-  <h2>Analiza</h2>
+      <!-- KOLONA E DJATHTË: LISTA -->
+      <section class="list-section">
+        <h2>Shpenzimet</h2>
+        <div id="expenses-list">
+          <p class="empty-msg">Nuk ka shpenzime ende.</p>
+        </div>
+      </section>
 
-  <!-- Toggle buttons -->
-  <div class="chart-toggle">
-    <button class="btn-toggle active" data-period="daily">Ditore</button>
-    <button class="btn-toggle" data-period="weekly">Javore</button>
-    <button class="btn-toggle" data-period="monthly">Mujore</button>
+    </div>
   </div>
 
-  <!-- Bar/Line Chart -->
-  <div class="chart-container">
-    <canvas id="trend-chart"></canvas>
-  </div>
-
-  <!-- Donut Chart -->
-  <div class="chart-container">
-    <canvas id="donut-chart"></canvas>
-  </div>
-
-</section>
-
-<!-- Chart.js nga CDN -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <!-- Scripts  -->
+  <!-- Scripts -->
   <script src="js/api.js"></script>
   <script src="js/ui.js"></script>
-  <script src="js/charts.js"></script>
   <script src="js/main.js"></script>
 
 </body>

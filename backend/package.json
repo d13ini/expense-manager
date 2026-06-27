@@ -1,13 +1,14 @@
 {
-  "name": "backend",
+  "name": "expense-manager-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "API backend për Menaxhues Shpenzimesh",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "test": "echo \"No tests specified\" && exit 0"
   },
   "keywords": [],
-  "author": "",
+  "author": "Drin Selmonaj",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {

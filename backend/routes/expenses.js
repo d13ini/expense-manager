@@ -1,6 +1,8 @@
-const express = require('express');
-const router  = express.Router();
-const pool    = require('../db');
+const express             = require('express');
+const router              = express.Router();
+const pool                = require('../db');
+// FIX: require i zhvendosur në krye, larg route definitions
+const { checkAndSendAlert } = require('../services/emailService');
 
 // ─── GET /api/expenses ─────────────────────────────────
 // Kthen të gjitha shpenzimet me emrin e kategorisë
@@ -19,9 +21,6 @@ router.get('/', async (req, res) => {
 // ─── POST /api/expenses ────────────────────────────────
 // Shton shpenzim të ri
 // Body: { amount, description, category_id, expense_date }
-const { checkAndSendAlert } = require('../services/emailService');
-
-// ─── POST /api/expenses ────────────────────────────────
 router.post('/', async (req, res) => {
   try {
     const { amount, description, category_id, expense_date } = req.body;
@@ -37,7 +36,7 @@ router.post('/', async (req, res) => {
       [amount, description || null, category_id || null, expense_date || new Date()]
     );
 
-    // kontrollo limitin menjëherë pas shtimit — E RE
+    // kontrollo limitin menjëherë pas shtimit
     checkAndSendAlert();
 
     res.status(201).json(result.rows[0]);

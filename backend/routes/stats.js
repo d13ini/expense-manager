@@ -50,4 +50,47 @@ router.get('/by-category', async (req, res) => {
   }
 });
 
+// GET /api/stats/range?from=YYYY-MM-DD&to=YYYY-MM-DD
+router.get('/range', async (req, res) => {
+  const { from, to } = req.query;
+
+  if (!from || !to) {
+    return res.status(400).json({ error: 'Kërkohen parametrat "from" dhe "to"' });
+  }
+
+  try {
+    const daily = await pool.query(
+      `SELECT DATE(expense_date) AS expense_date,
+              SUM(amount)        AS total_amount,
+              COUNT(*)           AS count
+       FROM expenses
+       WHERE DATE(expense_date) BETWEEN $1 AND $2
+       GROUP BY DATE(expense_date)
+       ORDER BY expense_date ASC`,
+      [from, to]
+    );
+
+    const byCategory = await pool.query(
+      `SELECT c.name        AS name,
+              c.color       AS color,
+              SUM(e.amount) AS total_amount
+       FROM expenses e
+       JOIN categories c ON e.category_id = c.id
+       WHERE DATE(e.expense_date) BETWEEN $1 AND $2
+       GROUP BY c.name, c.color
+       ORDER BY total_amount DESC`,
+      [from, to]
+    );
+
+    res.json({
+      daily:      daily.rows,
+      byCategory: byCategory.rows
+    });
+
+  } catch (err) {
+    console.error('Range stats error:', err.message);
+    res.status(500).json({ error: 'Gabim në server' });
+  }
+});
+
 module.exports = router;

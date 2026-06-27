@@ -52,3 +52,9 @@ async function saveAlertConfig(data) {
   });
   return response.json();
 }
+
+// Merr statistikat për një periudhë të caktuar
+async function getStatsByRange(from, to) {
+  const response = await fetch(`${BASE_URL}/stats/range?from=${from}&to=${to}`);
+  return response.json();
+}

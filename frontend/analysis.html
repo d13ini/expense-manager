@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analiza — Menaxhues Shpenzimesh</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- HEADER -->
+    <header>
+      <div class="header-top">
+        <div>
+          <h1>📊 Analiza</h1>
+          <p class="subtitle">Vizualizim i shpenzimeve</p>
+        </div>
+        <div class="header-actions">
+          <a href="index.html" class="btn-nav">← Kthehu</a>
+          <button id="theme-toggle" aria-label="Change Theme">🌙</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- DATE RANGE FILTER -->
+    <section class="charts-section">
+      <div class="range-filter">
+        <input type="date" id="date-from" />
+        <span>deri</span>
+        <input type="date" id="date-to" />
+        <button id="btn-analyze" class="btn-primary">Analizo</button>
+      </div>
+
+      <!-- Toggle buttons -->
+      <div class="chart-toggle">
+        <button class="btn-toggle active" data-period="daily">Ditore</button>
+        <button class="btn-toggle" data-period="weekly">Javore</button>
+        <button class="btn-toggle" data-period="monthly">Mujore</button>
+      </div>
+
+      <!-- Bar/Line Chart -->
+      <div class="chart-container">
+        <canvas id="trend-chart"></canvas>
+      </div>
+
+      <!-- Donut Chart -->
+      <div class="chart-container">
+        <canvas id="donut-chart"></canvas>
+      </div>
+
+    </section>
+
+  </div>
+
+  <!-- Chart.js nga CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
